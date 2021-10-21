@@ -1,0 +1,7 @@
+.container-fluid {
+    background-color: rgb(143, 196, 212);
+    color: white;
+    border: 3px solid black;
+    margin: 20px;
+    padding: 20px;
+  }

@@ -1,0 +1,49 @@
+<div *ngIf="dataLoaded==false" class="spinner-border text-secondary" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+<div class="mb-12">  
+    <button type="button" class="btn btn-primary" style="margin-left: 850px; " routerLink="/products/add">ÜRÜN EKLE</button> 
+</div>
+
+<div class="mb-3">
+    <label for="filterText" class="form-label">Ürün Ara </label>
+    <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="Arama ifadesi giriniz">
+  </div>
+
+  <div *ngIf="filterText" class="alert alert-primary">
+      {{filterText}} aradınız.
+  </div>
+
+  
+    <table *ngIf="dataLoaded==true" class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>ÜRÜN ADI</th>
+                <th>KATEGORİ</th>
+                <th>STOK ADEDİ</th>
+                <th>FİYAT</th>
+                <th> KDV'Lİ FİYATI</th>
+                <th> </th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let product of products | filterPipe:filterText | paginate: { itemsPerPage: count, currentPage: p }"> <!-- filtreleme tüm ürüne uygulanacağı için buraya yazdık -->
+            <td>{{product.product_id}}</td>
+            <td> {{product.product_name | uppercase}}</td>
+            <td>{{product.category_id}}</td>
+            <td>{{product.units_in_stock}}</td>
+            <td>{{product.unit_price | currency}}</td>
+            <td>{{product.unit_price |vatAdded:18 | currency}}</td>
+            <td><button (click)="addToCart(product)" type="button" class="btn btn-success">SEPETE EKLE</button></td>
+           
+        </tr>
+    </tbody>
+    </table>
+    <!--Including the pagination control.-->
+  <div class="text-right">
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>
+    
+ 
+
