@@ -13,14 +13,14 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./product.component.css']
 })
 export class ProductComponent implements OnInit {
-  
+
   products:Product[] = [];
   dataLoaded=false;
   filterText="";
 
   p: number = 1;
-  count: number = 10;
- 
+  count: number = 7;
+
 
   constructor(private productService:ProductService,
     private activatedRoute:ActivatedRoute, private toastrService:ToastrService,
